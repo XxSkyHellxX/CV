@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quienes Somos</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'estiloscss/estilo.css' %}">
+    <link rel="stylesheet" href="{% static 'estiloscss/style.css' %}">
+    <link rel="icon" type="image/png" href="{% static 'IMG/bobtail-japones.png' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/fontawesome.min.css"
+        integrity="sha384-QYIZto+st3yW+o8+5OHfT6S482Zsvz2WfOzpFSXMF9zqeLcFV0/wlZpMtyFcZALm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.4.js"
+        integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
+    <style>
+        .miBody {
+            background-image: url("{% static 'img/fondoForm.jpg' %}");
+        }      
+    </style>        
+</head>
+
+<body class="miBody">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-sm-5 col-md-5 col-lg-4 col-xl-4">
+                <!--Barra Lateral-->
+                <div class="offcanvas offcanvas-start border border-dark" id="intro">
+
+                    <div class="offcanvas-header">
+                      <div class="offcanvas-title ms-5">
+                        <h1 class="animate-charcterBarra col-12 ms-3"><a href="{% url 'index' %}">Ino Nunu</a></h1>
+                      </div>
+                    </div>
+          
+                    <hr>
+          
+                    <div class=" offcanvas-body me-5">
+                        <ol class="list-group ms-5">
+                            {% if nombreADMIN %}
+                            <li class="animate-charcterMenu list-group-item list-group-item-danger"><a
+                                href="{% url 'perfil' %}">Perfil {{nombreADMIN}}</a>
+                            <li class="animate-charcterMenu list-group-item list-group-item-danger"><a
+                                href="{% url 'quienesSomos' %}">Quienes Somos</a></li>
+                            <li class="animate-charcterMenu list-group-item list-group-item-danger"><a
+                                href="{% url 'feriados' %}">Feriados</a></li>
+                            {% elif nombreUser %}
+                            <li class="animate-charcterMenu list-group-item list-group-item-danger"><a
+                                href="{% url 'perfil' %}">Perfil {{nombreUser}}</a>
+                            <li class="animate-charcterMenu list-group-item list-group-item-danger"><a
+                                href="{% url 'quienesSomos' %}">Quienes Somos</a></li>
+                            <li class="animate-charcterMenu list-group-item list-group-item-danger"><a
+                                href="{% url 'galeria' %}">Galeria</a></li>
+                            <li class="animate-charcterMenu list-group-item list-group-item-danger"><a
+                                href="{% url 'feriados' %}">Feriados</a></li>
+                            {% else %}
+                            <li class="animate-charcterMenu list-group-item list-group-item-danger"><a
+                                href="{% url 'quienesSomos' %}">Quienes Somos</a></li>
+                            <li class="animate-charcterMenu list-group-item list-group-item-danger"><a
+                                href="{% url 'galeria' %}">Galeria</a></li>
+                            <li class="animate-charcterMenu list-group-item list-group-item-danger"><a
+                                href="{% url 'feriados' %}">Feriados</a></li>
+                            {% endif %}
+                          </ol>
+                    </div>
+          
+                    <div class="offcanvas-footer">
+                        <div class="container">
+                            <div class="row col-12">
+                                <span class="alerta mb-2">Sino tienes cuenta <a href="{% url 'registro' %}"
+                                        style="color: rgb(255, 72, 6);">REGISTRATE
+                                        AQUI</a></span>
+                                {% if nombreADMIN %}
+                                <button class=" mb-2 animate-charcterMenu btn border-danger btn-light"
+                                    style="margin-left: 12px;"><a href="{% url 'salir' %}">Salir</a></button>
+                                {% elif nombreUser %}
+                                <button class=" mb-2 animate-charcterMenu btn border-danger btn-light"
+                                    style="margin-left: 12px;"><a href="{% url 'salir' %}">Salir</a></button>
+                                {% else %}
+                                <button class=" mb-2 animate-charcterMenu btn border-danger btn-light"
+                                    style="margin-left: 12px;"><a href="{% url 'iniciarSesion' %}">Iniciar
+                                        Sesion</a></button>
+                                {% endif %}            
+                            </div>
+                        </div>
+                    </div>
+          
+                  </div>
+                <!--Fin barra lateral-->
+            </div>
+
+            <!--Barra De Navegacion-->
+            <div class="container" style="margin-left: 4px;">
+                <div class="row">
+                    <div class="col-sm-12 col-md-12 col-lg-12  col-xl-12">
+                        <div class="bordeCSS rounded">
+                            <div class="navbar-collapse ">
+                                <nav class="navbar navbar-expand-md ps-3 rounded"
+                                    style="background-color: rgba(255, 255, 255, 0.826);">
+                                    <!--Boton de la barra-->
+                                    <button class="btn border-danger btn-light ms-2 col-0 py-4 px-3"
+                                        data-bs-toggle="offcanvas" data-bs-target="#intro" id="navboton"><img
+                                            class="img-fluid dom" src="{% static 'img/bobtail-japones.png' %}" alt="">
+                                    </button>
+
+                                    <div class="col">
+
+                                    </div>
+
+                                    <div>
+                                        <h1 class="text-light animate-charcter ms-2 mt-2 me-3"><a
+                                                href="{% url 'index' %}">Ino
+                                                Nunu</a></h1>
+                                    </div>
+                                </nav>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!--Fin barra de navegacion-->
+            <div class="container-fluid mt-5 mb-5" style="margin-left: 4px;">
+                <div class="row justify-content-center">
+                    <div class="col-sm-5 col-md-5 col-lg-5 col-xl-5 bordeCSS rounded" id="rel"
+                        style="background-color: rgba(255, 255, 255, 0.826);">
+                        <div class="reloj mt-4">
+                            <p class="fecha dom"></p>
+                            <p class="tiempo dom"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Cuerpo de la pagina-->
+            <div class="container" style="margin-top: 10px;margin-left: 4px;">
+                <div class="row">
+                    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                        <div class="row justify-content-center">
+                            <div class="col-sm-5 col-md-5 col-lg-5 col-xl-5 rounded-top "
+                                style="border: 1px solid rgb(229, 69, 11);background-color: rgba(255, 255, 255, 0.826);">
+                                <h1 class="mt-2 text-center animate-charcterMV">
+                                    Mision
+                                </h1>
+                                <p class="text-center letras">
+                                    Nuestra principal misión es centrarnos siempre en el bienestar de las mascotas.
+                                    Además, nos comprometemos a contribuir con la "Fundación Animalista Maipo" en su
+                                    importante labor de rescate, rehabilitación y reubicación de animales en situación
+                                    de abandono o maltrato. Buscamos generar una cultura de respeto y cuidado hacia las
+                                    mascotas.
+                                </p>
+                            </div>
+
+                            <div class="col-sm-5 col-md-5 col-lg-5 col-xl-5 rounded-top"
+                                style="border: 1px solid rgb(229, 69, 11);background-color: rgba(255, 255, 255, 0.826);">
+                                <h1 class="mt-2 text-center animate-charcterMV">
+                                    Vision
+                                </h1>
+                                <p class="text-center letras">En Ino Nunu nos esforzamos por convertirnos en una marca
+                                    que
+                                    realmente se preocupa por las mascotas, ofreciendo una amplia variedad de productos
+                                    de alta calidad. Buscamos ser reconocidos por nuestra innovación y compromiso con el
+                                    bienestar animal, convirtiéndonos en la primera opción de nuestros clientes al
+                                    buscar productos para sus mascotas. Queremos marcar la diferencia en el mercado y
+                                    ser un referente de excelencia en el cuidado de las mascotas.</p>
+                            </div>
+
+                            <div class="col-sm-10 col-md-10 col-lg-10 col-xl-10 rounded-bottom "
+                                style="border: 1px solid rgb(229, 69, 11);background-color: rgba(255, 255, 255, 0.826);">
+                                <h1 class="text-center animate-charcterMV mt-2">
+                                    Objetivos
+                                </h1>
+                                <ul class="list-group mb-1 ">
+                                    <li class="letras" style="border-bottom: 1px solid rgb(229, 69, 11);">
+                                        Asegurar que el 100% de los productos vendidos en la tienda sean éticos y
+                                        respetuosos con el bienestar animal.
+                                    </li>
+                                    <li class="letras" style="border-bottom: 1px solid rgb(229, 69, 11);">
+                                        Donar un porcentaje de las ventas de productos específicos, como alimentos para
+                                        animales de la "Fundación Animalista Maipo
+                                    </li>
+                                    <li class="letras" style="border-bottom: 1px solid rgb(229, 69, 11);">
+                                        Ofrecer precios justos y competitivos para nuestros clientes
+                                    </li>
+                                    <li class="letras mb-2">
+                                        Brindar la mejor experiencia de compra web posible
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container mt-5">
+                    <div class="row justify-content-center float-center">
+                        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                            <div class="container">
+                                <div class="row justify-content-center">
+                                    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                        <div class="container">
+                                            <div class="row justify-content-center">
+                                                <iframe class="mt-3" width="500" height="315"
+                                                    src="https://www.youtube.com/embed/KSg9RP0lLQg"
+                                                    title="YouTube video player" frameborder="0"
+                                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                                    allowfullscreen></iframe>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--Fin del cuerpo de pagina-->
+
+                <!--Pie De Pagina-->
+                <div class="container mt-5" style="margin-left: 4px;">
+                    <div class="row">
+                        <div class="col-sm-5 col-md-12 col-lg-12 col-xl-12 bordeCSS rounded mt-4 "
+                            style="background-color: rgba(255, 255, 255, 0.795);">
+                            <!--Contactos-->
+                            <div class="container" id="Contactos">
+                                <div class="row ">
+                                    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 "
+                                        style="background-color: rgba(255, 255, 255, 0);">
+                                        <div class="container">
+                                            <div class="row justify-content-center float-center">
+                                                <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7" id="contai">
+                                                    <ul class="breadcrumb mt-2 ms-5">
+                                                        <li>
+                                                            <img class="icono me-2 ms-3 breadcrumb-item"
+                                                                src="{% static 'img/img rrss/instagram.png' %}"
+                                                                alt=""><a class="animate-charcterFooter"
+                                                                href="https://www.instagram.com/colectivoanimalistadelmaipo/?hl=es">Instagram</a>
+                                                        </li>
+                                                        <li><img class="icono me-2 ms-3 breadcrumb-item"
+                                                                src="{% static 'img/img rrss/gorjeo.png' %}" alt=""><a
+                                                                class="animate-charcterFooter" href="">Twitter</a></li>
+                                                        <li><img class="icono me-2 ms-3 breadcrumb-item"
+                                                                src="{% static 'img/img rrss/facebook.png' %}" alt=""><a
+                                                                class="animate-charcterFooter" href="https://www.facebook.com/people/Colectivo-Animalista-Del-Maipo/100064562207119/">Facebook</a></li>
+                                                        <li><img class="icono me-2 ms-3 breadcrumb-item"
+                                                                src="{% static 'img/img rrss/google.png' %}" alt=""><a
+                                                                class="animate-charcterFooter" href="https://docs.google.com/forms/d/e/1FAIpQLSeaxKZlvxSzsZqiijLmi9z1esQHSMGkYX1pkQkDLbcdJR4BOw/viewform">Google</a></li>
+                                                        <li><img class="icono me-2 ms-3 breadcrumb-item"
+                                                                src="{% static 'img/img rrss/whatsapp.png' %}" alt=""><a
+                                                                class="animate-charcterFooter" href="">whatsapp</a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--Fin contactos-->
+
+                                        <!--Imagen y CopyRight-->
+                                        <div class="container">
+                                            <div class="row justify-content-center float-center">
+                                                <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                    <div class="container">
+                                                        <div class="row justify-content-center">
+                                                            <div class="col-sm-1 col-md-1 col-lg-1 col-xl-1"
+                                                                style="width: 100px;height: 60px;">
+                                                                <div class="container">
+                                                                    <div class="row justify-content-center">
+                                                                        <img class="img-fluid"
+                                                                            src="{% static 'img/bobtail-japones.png' %}" alt="">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <br>
+
+                                                    <div class="container">
+                                                        <div class="row justify-content-center float-center ">
+                                                            <div class="col-sm-5 col-md-6 col-lg-6 col-xl-6">
+                                                                <h6 class="animate-charcterFooter text-center"
+                                                                    style="font-size: 10px;">&copy;Copyright
+                                                                    Derechos reservados</h6>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--Fin imagen y copyright-->
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!--Fin pie de pagina-->
+                <script src="{% static 'misJS/script.js' %}"></script>
+                <script src="{% static 'misJS/dom.js' %}"></script>
+                <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+                    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+                    crossorigin="anonymous"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+                    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+                    crossorigin="anonymous"></script>
+                <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+                    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+                    crossorigin="anonymous"></script>
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+                    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+                    crossorigin="anonymous"></script>
+            </div>
+        </div>
+</body>
+
+</html>

@@ -1,0 +1,4 @@
+Requerimientos para su ejecucion:
+
+instalar Pillow: pip install Pillow
+instalar bootstrap5:pip install django-bootstrap5

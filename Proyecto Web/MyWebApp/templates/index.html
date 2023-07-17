@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inicio</title>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'estiloscss/estilo.css' %}">
+  <link rel="stylesheet" href="{% static 'estiloscss/style.css' %}">
+  <link rel="icon" type="image/png" href="{% static 'IMG/bobtail-japones.png' %}">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/fontawesome.min.css"
+    integrity="sha384-QYIZto+st3yW+o8+5OHfT6S482Zsvz2WfOzpFSXMF9zqeLcFV0/wlZpMtyFcZALm" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E="
+    crossorigin="anonymous"></script>
+  <style>
+    .miBody {
+      background-image: url("{% static 'img/fondoForm.jpg' %}");
+    }
+  </style>
+</head>
+
+<body class="miBody">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-5 col-md-5 col-lg-4 col-xl-4">
+        <!--Barra Lateral-->
+        <div class="offcanvas offcanvas-start border border-dark" id="intro">
+
+          <div class="offcanvas-header">
+            <div class="offcanvas-title ms-5">
+              <h1 class="animate-charcterBarra col-12 ms-3"><a href="{% url 'index' %}">Ino Nunu</a></h1>
+            </div>
+          </div>
+
+          <hr>
+
+          <div class=" offcanvas-body me-5">
+            <ol class="list-group ms-5">
+              {% if nombreADMIN %}
+              <li class="animate-charcterMenu list-group-item list-group-item-danger"><a
+                  href="{% url 'perfil' %}">Perfil {{nombreADMIN}}</a>
+              <li class="animate-charcterMenu list-group-item list-group-item-danger"><a
+                  href="{% url 'quienesSomos' %}">Quienes Somos</a></li>
+
+              <li class="animate-charcterMenu list-group-item list-group-item-danger"><a
+                  href="{% url 'feriados' %}">Feriados</a></li>
+              {% elif nombreUser %}
+              <li class="animate-charcterMenu list-group-item list-group-item-danger"><a
+                  href="{% url 'perfil' %}">Perfil {{nombreUser}}</a>
+              <li class="animate-charcterMenu list-group-item list-group-item-danger"><a
+                  href="{% url 'quienesSomos' %}">Quienes Somos</a></li>
+              <li class="animate-charcterMenu list-group-item list-group-item-danger"><a
+                  href="{% url 'galeria' %}">Galeria</a></li>
+              <li class="animate-charcterMenu list-group-item list-group-item-danger"><a
+                  href="{% url 'feriados' %}">Feriados</a></li>
+              {% else %}
+              <li class="animate-charcterMenu list-group-item list-group-item-danger"><a
+                  href="{% url 'quienesSomos' %}">Quienes Somos</a></li>
+              <li class="animate-charcterMenu list-group-item list-group-item-danger"><a
+                  href="{% url 'galeria' %}">Galeria</a></li>
+              <li class="animate-charcterMenu list-group-item list-group-item-danger"><a
+                  href="{% url 'feriados' %}">Feriados</a></li>
+              {% endif %}
+            </ol>
+          </div>
+
+          <div class="offcanvas-footer">
+            <div class="container">
+              <div class="row col-12">
+                <span class="alerta mb-2">Sino tienes cuenta <a href="{% url 'registro' %}"
+                    style="color: rgb(255, 72, 6);">REGISTRATE
+                    AQUI</a></span>
+                {% if nombreADMIN %}
+                <button class=" mb-2 animate-charcterMenu btn border-danger btn-light" style="margin-left: 12px;"><a
+                    href="{% url 'salir' %}">Salir</a></button>
+                {% elif nombreUser %}
+                <button class=" mb-2 animate-charcterMenu btn border-danger btn-light" style="margin-left: 12px;"><a
+                    href="{% url 'salir' %}">Salir</a></button>
+                {% else %}
+                <button class=" mb-2 animate-charcterMenu btn border-danger btn-light" style="margin-left: 12px;"><a
+                    href="{% url 'iniciarSesion' %}">Iniciar
+                    Sesion</a></button>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <!--Fin barra lateral-->
+      </div>
+
+      <!--Barra De Navegacion-->
+      <div class="container" style="margin-left: 4px;">
+        <div class="row">
+          <div class="col-sm-12 col-md-12 col-lg-12  col-xl-12">
+            <div class="bordeCSS rounded">
+              <div class="navbar-collapse ">
+                <nav class="navbar navbar-expand-md ps-3 rounded" style="background-color: rgba(255, 255, 255, 0.826);">
+                  <!--Boton de la barra-->
+                  <button class="btn border-danger btn-light ms-2 col-0 py-4 px-3 " data-bs-toggle="offcanvas"
+                    data-bs-target="#intro" id="navboton"><img class="img-fluid dom "
+                      src="{% static 'img/bobtail-japones.png' %}" alt="">
+                  </button>
+
+                  <div class="col">
+
+                  </div>
+
+                  <div>
+                    <h1 class="text-light animate-charcter ms-2 mt-2 me-3"><a href="{% url 'index' %}">Ino Nunu</a></h1>
+                  </div>
+                </nav>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!--Fin barra de navegacion-->
+      <div class="container-fluid mt-5 mb-5">
+        <div class="row justify-content-center">
+          <div class="col-sm-5 col-md-5 col-lg-5 col-xl-5 bordeCSS rounded" id="rel"
+            style="background-color: rgba(255, 255, 255, 0.826);">
+            <div class="reloj mt-4 ">
+              <p class="fecha dom"></p>
+              <p class="tiempo dom"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--Carrusel-->
+      <div class="container" style="margin-left: 4px;">
+        <div class="row justify-content-center">
+          <div style="height: 500px; width: 500px;" class="mb-5">
+            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+              <ol class="carousel-indicators">
+                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+              </ol>
+              <div class="carousel-inner bordeCSS rounded" style="background-color: rgba(255, 255, 255, 0.826);">
+                <div class="carousel-item active">
+                  <img class="d-block w-100 img-fluid" src="{% static 'img/arnes.png' %}" alt="Second slide"
+                    title="Correas">
+                  <h6 class="animate-charcterCar ms-1 text-center mt-1"> Correas</h6>
+                  <p class="animate-charcterCar ms-1 text-center">El Arnés para gatos es una opción agradable y liviana
+                    para
+                    caminatas con tu pequeño felino, está hecho de materiales adecuados y es súper suave con un
+                    llamativo y hermoso diseño, además de delicados y variados colores que se perciben con mayor.</p>
+                  <h1 class="animate-charcterPrecio ms-1 text-center mt-1">$5.000</h1>
+                </div>
+                <div class="carousel-item">
+                  <img class="d-block w-100 img-fluid" src="{% static 'img/correas.jpg' %}" alt="Second slide"
+                    title="Correas">
+                  <h6 class="animate-charcterCar ms-1 text-center mt-1"> Correas</h6>
+                  <p class="animate-charcterCar ms-1 text-center">El Arnés para gatos es una opción agradable y liviana
+                    para
+                    caminatas con tu pequeño felino, está hecho de materiales adecuados y es súper suave con un
+                    llamativo y hermoso diseño, además de delicados y variados colores que se perciben con mayor.</p>
+                  <h1 class="animate-charcterPrecio ms-1 text-center mt-1">$5.000</h1>
+                </div>
+                <div class="carousel-item">
+                  <img class="d-block w-100 img-fluid" src="{% static 'img/bandanasReal.jpg' %}" alt="Third slide"
+                    title="Bandanas">
+                  <h6 class="animate-charcterCar ms-1 text-center mt-1"> Bandanas</h6>
+                  <p class="animate-charcterCar ms-1 text-center"> Diseño único de patrón navideño: esta bufanda con
+                    cabeza de perro
+                    añade una impresión única de temática navideña sobre la base del diseño clásico original de patrón
+                    de celosía, lleno de ambiente festivo.</p>
+                  <h1 class="animate-charcterPrecio ms-1 text-center mt-1">$5.000</h1>
+                </div>
+              </div>
+              <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon col-0 fondoCarrusel" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+              </a>
+              <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon col-0 fondoCarrusel" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!--Fin Carrusel-->
+
+      <div class="container" style="margin-left: 4px;">
+        <div class="row justify-content-center">
+          <div class="col-sm-6 col-md-12 col-lg-12 col-xl-12">
+            <h1 class="text-center mb-2 letrasMision " style="margin-top: 110px;">Motivacion</h1>
+          </div>
+        </div>
+      </div>
+
+      <!--Centro de la pagina-->
+
+      <div class="container rounded"
+        style="border: 1px solid rgb(229, 69, 11);background-color: rgba(255, 255, 255, 0.826);margin-left: 4px;">
+        <div class="row justify-content-center">
+          <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 ">
+            <ul class="list-group">
+              <li class="list-group-item text-center" style="border: none;background-color: rgba(255, 255, 255, 0);">
+                <p class="letras">
+                  Como dueños de la tienda Inu Nunu donamos a la fundación animalista maipo, estamos muy orgullosos
+                  de ofrecer a nuestros clientes una forma de apoyar la protección y el bienestar animal mientras
+                  compran
+                  productos para sus mascotas. Nos esforzamos por ofrecer productos de alta calidad y de origen ético,
+                  seleccionando cuidadosamente cada artículo que ofrecemos en nuestras estanterías. Creemos que no solo
+                  es importante cuidar y nutrir a nuestras mascotas, sino también contribuir a una causa noble que busca
+                  mejorar la vida de los animales.
+                </p>
+
+                <div class="container">
+                  <div class="row justify-content-center">
+                    <div class="col-sm-5 col-md-5 col-lg-5 col-xl-5 mb-2">
+                      <img src="{% static 'img/IMG-20220925-WA0014.jpeg' %}" alt="" class=" img-fluid rounded rounded"
+                        style="border: 1px solid rgb(229, 69, 11);width: 450px;height: 450px;">
+                    </div>
+                    <div class="col-sm-5 col-md-5 col-lg-5 col-xl-5 mb-2">
+                      <img src="{% static 'img/kimiCono.jpg' %}" alt="" class="img-fluid rounded rounded"
+                        style="border: 1px solid rgb(229, 69, 11);width: 450px;height: 450px;">
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li class="list-group-item text-center" style="border: none;background-color: rgba(255, 255, 255, 0);">
+                <p class="letras">En nuestra tienda, hacemos donaciones regulares a la fundación animalista maipo a la
+                  cual apoyamos y
+                  siempre nos aseguramos de que los productos que vendemos sean de alta calidad y éticos. Nuestros
+                  clientes pueden estar seguros de que cada compra que realizan en nuestra tienda está ayudando a
+                  mejorar la vida de los animales y a apoyar a una organización que se preocupa por su bienestar.
+                  Además, nuestro equipo está formado por amantes de los animales que están disponibles para brindar
+                  asesoramiento y ayuda en todo momento, con el objetivo de ayudar a que las mascotas de nuestros
+                  clientes sean felices y saludables.</p>
+
+                <div class="container">
+                  <div class="row justify-content-center">
+                    <div class="col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                      <img src="{% static 'img/bandanas.jpg' %}" alt="" class="img-fluid rounded"
+                        style="border: 1px solid rgb(229, 69, 11);">
+                    </div>
+                  </div>
+                </div>
+
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!--Fin centro de la pagina-->
+
+      <!--Pie De Pagina-->
+      <div class="container mt-4" style="margin-left: 4px;">
+        <div class="row">
+          <div class="col-sm-5 col-md-12 col-lg-12 col-xl-12 bordeCSS rounded mt-4 "
+            style="background-color: rgba(255, 255, 255, 0.795);">
+            <!--Contactos-->
+            <div class="container" id="Contactos">
+              <div class="row ">
+                <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 " style="background-color: rgba(255, 255, 255, 0);">
+                  <div class="container">
+                    <div class="row justify-content-center float-center">
+                      <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7" id="contai">
+                        <ul class="breadcrumb mt-2 ms-5">
+                          <li>
+                            <img class="icono me-2 ms-3 breadcrumb-item" src="{% static 'img/img rrss/instagram.png' %}"
+                              alt=""><a class="animate-charcterFooter"
+                              href="https://www.instagram.com/colectivoanimalistadelmaipo/?hl=es">Instagram</a>
+                          </li>
+                          <li><img class="icono me-2 ms-3 breadcrumb-item" src="{% static 'img/img rrss/gorjeo.png' %}"
+                              alt=""><a class="animate-charcterFooter" href="">Twitter</a></li>
+                          <li><img class="icono me-2 ms-3 breadcrumb-item"
+                              src="{% static 'img/img rrss/facebook.png' %}" alt=""><a class="animate-charcterFooter"
+                              href="https://www.facebook.com/people/Colectivo-Animalista-Del-Maipo/100064562207119/">Facebook</a>
+                          </li>
+                          <li><img class="icono me-2 ms-3 breadcrumb-item" src="{% static 'img/img rrss/google.png' %}"
+                              alt=""><a class="animate-charcterFooter"
+                              href="https://docs.google.com/forms/d/e/1FAIpQLSeaxKZlvxSzsZqiijLmi9z1esQHSMGkYX1pkQkDLbcdJR4BOw/viewform">Google</a>
+                          </li>
+                          <li><img class="icono me-2 ms-3 breadcrumb-item"
+                              src="{% static 'img/img rrss/whatsapp.png' %}" alt=""><a class="animate-charcterFooter"
+                              href="">whatsapp</a></li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <!--Fin contactos-->
+
+                  <!--Imagen y CopyRight-->
+                  <div class="container">
+                    <div class="row justify-content-center float-center">
+                      <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                        <div class="container">
+                          <div class="row justify-content-center">
+                            <div class="col-sm-1 col-md-1 col-lg-1 col-xl-1" style="width: 100px;height: 60px;">
+                              <div class="container">
+                                <div class="row justify-content-center">
+                                  <img class="img-fluid" src="{% static 'img/bobtail-japones.png' %}" alt="">
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <br>
+
+                        <div class="container">
+                          <div class="row justify-content-center float-center ">
+                            <div class="col-sm-5 col-md-6 col-lg-6 col-xl-6">
+                              <h6 class="animate-charcterFooter text-center" style="font-size: 10px;">&copy;Copyright
+                                Derechos reservados</h6>
+                            </div>
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                  <!--Fin imagen y copyright-->
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <!--Fin pie de pagina-->
+      <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+      <script src="{% static 'misJS/script.js' %}"></script>
+      <script src="{% static 'misJS/dom.js' %}"></script>
+    </div>
+  </div>
+</body>
+
+</html>

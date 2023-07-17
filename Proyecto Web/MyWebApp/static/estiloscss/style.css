@@ -1,0 +1,16 @@
+
+.reloj{
+    font-family: 'Cinzel', serif;
+    color: rgb(229, 69, 11);
+    text-align: center;
+    text-shadow: 0 0 15px rgb(229, 69, 11),0 0 15px rgb(229, 69, 11) ;
+}
+.tiempo{
+    letter-spacing: 0.05em;
+    font-size: 30px;
+    padding: 5px 0;
+}
+.fecha{
+    letter-spacing: 0.1em;
+    font-size: 24px;
+}

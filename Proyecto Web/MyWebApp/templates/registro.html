@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'estiloscss/estilo.css' %}">
+    <link rel="stylesheet" href="{% static 'estiloscss/style.css' %}">
+    <link rel="icon" type="image/png" href="{% static 'IMG/bobtail-japones.png' %}">
+    <script src="https://code.jquery.com/jquery-3.6.4.js"
+    integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/fontawesome.min.css"
+    integrity="sha384-QYIZto+st3yW+o8+5OHfT6S482Zsvz2WfOzpFSXMF9zqeLcFV0/wlZpMtyFcZALm" crossorigin="anonymous">
+    <style>
+        .miBody {
+            background-image: url("{% static 'img/fondoForm.jpg' %}");
+        }      
+    </style>
+</head>
+
+<body class="miBody">
+    <div class="container ">
+        <div class="row">
+            <div class="col-sm-5 col-md-5 col-lg-4 col-xl-4">
+                <!--Barra Lateral-->
+                <div class="offcanvas offcanvas-start border border-dark" id="intro">
+
+                    <div class="offcanvas-header">
+                        <div class="offcanvas-title ms-5">
+                            <h1 class="animate-charcterBarra col-12 ms-3"><a href="{% url 'index' %}">Ino Nunu</a></h1>
+                        </div>
+                    </div>
+
+                    <hr>
+                    
+                    <div class=" offcanvas-body me-5" >
+                        <ol class="list-group ms-5">
+                            {% if nombreADMIN %}
+                            <li class="animate-charcterMenu list-group-item list-group-item-danger"><a
+                                href="{% url 'perfil' %}">Perfil {{nombreADMIN}}</a>
+                            <li class="animate-charcterMenu list-group-item list-group-item-danger"><a
+                                href="{% url 'quienesSomos' %}">Quienes Somos</a></li>
+
+                            <li class="animate-charcterMenu list-group-item list-group-item-danger"><a
+                                href="{% url 'feriados' %}">Feriados</a></li>
+                            {% elif nombreUser %}
+                            <li class="animate-charcterMenu list-group-item list-group-item-danger"><a
+                                href="{% url 'perfil' %}">Perfil {{nombreUser}}</a>
+                            <li class="animate-charcterMenu list-group-item list-group-item-danger"><a
+                                href="{% url 'quienesSomos' %}">Quienes Somos</a></li>
+                            <li class="animate-charcterMenu list-group-item list-group-item-danger"><a
+                                href="{% url 'galeria' %}">Galeria</a></li>
+                            <li class="animate-charcterMenu list-group-item list-group-item-danger"><a
+                                href="{% url 'feriados' %}">Feriados</a></li>
+                            {% else %}
+                            <li class="animate-charcterMenu list-group-item list-group-item-danger"><a
+                                href="{% url 'quienesSomos' %}">Quienes Somos</a></li>
+                            <li class="animate-charcterMenu list-group-item list-group-item-danger"><a
+                                href="{% url 'galeria' %}">Galeria</a></li>
+                            <li class="animate-charcterMenu list-group-item list-group-item-danger"><a
+                                href="{% url 'feriados' %}">Feriados</a></li>
+                            {% endif %}
+                          </ol>
+                    </div>
+
+                    <div class="offcanvas-footer">
+                        <div class="container">
+                            <div class="row col-12">
+                                <span class="alerta mb-2">Sino tienes cuenta <a href="{% url 'registro' %}"
+                                        style="color: rgb(255, 72, 6);">REGISTRATE
+                                        AQUI</a></span>
+                                {% if nombreADMIN %}
+                                <button class=" mb-2 animate-charcterMenu btn border-danger btn-light"
+                                    style="margin-left: 12px;"><a href="{% url 'salir' %}">Salir</a></button>
+                                {% elif nombreUser %}
+                                <button class=" mb-2 animate-charcterMenu btn border-danger btn-light"
+                                    style="margin-left: 12px;"><a href="{% url 'salir' %}">Salir</a></button>
+                                {% else %}
+                                <button class=" mb-2 animate-charcterMenu btn border-danger btn-light"
+                                    style="margin-left: 12px;"><a href="{% url 'iniciarSesion' %}">Iniciar
+                                        Sesion</a></button>
+                                {% endif %}            
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!--Fin barra lateral-->
+            </div>
+
+            <!--Barra De Navegacion-->
+            <div class="container" style="margin-left: 4px;">
+                <div class="row">
+                    <div class="col-sm-12 col-md-12 col-lg-12  col-xl-12">
+                        <div class="bordeCSS rounded">
+                            <div class="navbar-collapse ">
+                                <nav class="navbar navbar-expand-md ps-3 rounded"
+                                    style="background-color: rgba(255, 255, 255, 0.826);">
+                                    <!--Boton de la barra-->
+                                    <button class="btn border-danger btn-light ms-2 col-0 py-4 px-3"
+                                        data-bs-toggle="offcanvas" data-bs-target="#intro" id="navboton"><img
+                                            class="img-fluid dom" src="{% static 'img/bobtail-japones.png' %}" alt="">
+                                    </button>
+
+                                    <div class="col">
+
+                                    </div>
+
+                                    <div>
+                                        <h1 class="text-light animate-charcter ms-2 mt-2 me-3"><a
+                                                href="{% url 'index' %}">Ino
+                                                Nunu</a></h1>
+                                    </div>
+                                </nav>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!--Fin barra de navegacion-->
+            <div class="container-fluid mt-5 mb-5" style="margin-left: 4px;">
+                <div class="row justify-content-center">
+                    <div class="col-sm-5 col-md-5 col-lg-5 col-xl-5 bordeCSS rounded" id="rel"
+                        style="background-color: rgba(255, 255, 255, 0.826);">
+                        <div class="reloj mt-4 mb-3">
+                            <p class="fecha dom"></p>
+                            <p class="tiempo dom"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--Centro de la pagina-->
+            <div class="container " style="margin-left: 4px;">
+                <div class="row justify-content-center ">
+                    <div class=" col-sm-12 col-md-12 col-lg-12 col-xl-12 ">
+                        <div class="container mb-4">
+                            <div class="row justify-content-center">
+                                <div class="col-sm-5 col-md-5 col-lg-5 col-xl-5 bordeCSS rounded mt-4"
+                                    style="background-color: rgba(255, 255, 255, 0.826);">
+                                    <form action="" method="POST" id="miForm" name="miForm" enctype="multipart/form-data"> 
+                                        {% csrf_token %}
+                                        <div class="form-group">
+                                            <div class="row justify-content-center mx-2 mx-2">
+                                                <label for="{{ usuarioform.field.name }}" class="formuLabel mt-2">{{ usuarioform.nombre_real.label }}</label>
+                                                {{ usuarioform.nombre_real }}
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="row justify-content-center mx-2">
+                                                <label for="{{usuarioform.field.name}}" class="formuLabel">{{usuarioform.apellidos.label}}</label>
+                                                {{usuarioform.apellidos}}
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="row justify-content-center mx-2 mx-2">
+                                                <label for="{{ usuarioform.field.name }}" class="formuLabel mt-2">{{usuarioform.nombre_usuario.label}}</label>
+                                                {{usuarioform.nombre_usuario}}
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="row justify-content-center mx-2 mx-2">
+                                                <label for="{{ usuarioform.field.name }}" class="formuLabel mt-2">{{ usuarioform.contrasena.label }}</label>
+                                                {{ usuarioform.contrasena }}
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="row justify-content-center mx-2 mx-2">
+                                                <label for="{{ usuarioform.field.name }}" class="formuLabel mt-2">{{ usuarioform.re_contrasena.label }}</label>
+                                                {{ usuarioform.re_contrasena }}
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="row justify-content-center mx-2">
+                                                <label for="{{ usuarioform.field.name }}" class="formuLabel mt-2">{{ usuarioform.rut.label }}</label>
+                                                {{ usuarioform.rut }}
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="row justify-content-center mx-2">
+                                                <label for="{{ usuarioform.field.name }}" class="formuLabel mt-2">{{ usuarioform.comuna.label }}</label>
+                                                {{usuarioform.comuna}}
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="row justify-content-center mx-2">
+                                                <label for="{{ usuarioform.field.name }}" class="formuLabel mt-2">{{ usuarioform.celular.label }}</label>
+                                                {{usuarioform.celular}}
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="row justify-content-center mx-2">
+                                                <label for="{{ usuarioform.field.name }}" class="formuLabel mt-2">{{ usuarioform.direccion.label }}</label>
+                                                {{usuarioform.direccion}}
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="row justify-content-center mx-2">
+                                                <label for="{{ usuarioform.field.name }}" class="formuLabel mt-2">{{ usuarioform.correo.label }}</label>
+                                                {{usuarioform.correo}}
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="row justify-content-center mx-2">
+                                                <label for="{{ usuarioform.field.name }}" class="formuLabel mt-2">{{ usuarioform.imagen.label }}</label>
+                                                {{usuarioform.imagen}}
+                                            </div>
+                                        </div><br>
+                                        <!--Botones-->
+                                        <div class="container px-2">
+                                            <div class="row justify-content-center">
+                                                <button type="submit" id="envio"
+                                                    class=" mb-2 animate-charcterMenu btn border-danger btn-light">Registrar</button>
+                                                <button type="reset"
+                                                    class=" mb-2 animate-charcterMenu btn border-danger btn-light">Limpiar</button>
+                                                <button type=""
+                                                    class=" mb-2 animate-charcterMenu btn border-danger btn-light"><a
+                                                        href="{% url 'index' %}">Cancelar</a></button>
+
+                                            </div>
+                                        </div>
+
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Fin centro de pagina-->
+            <!--Pie De Pagina-->
+            <div class="container" style="margin-left: 4px;">
+                <div class="row">
+                    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 ">
+                        <!--Contactos-->
+                        <div class="container" id="Contactos">
+                            <div class="row ">
+                                <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 bordeCSS rounded mt-4"
+                                    style="background-color: rgba(255, 255, 255, 0.826);">
+                                    <div class="container">
+                                        <div class="row justify-content-center float-center">
+                                            <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7 " id="contai">
+                                                <ul class="breadcrumb mt-2 ms-5">
+                                                    <li>
+                                                        <img class="icono me-2 ms-3 breadcrumb-item"
+                                                            src="{% static 'img/img rrss/instagram.png' %}" alt=""><a
+                                                            class="animate-charcterFooter" href="https://www.instagram.com/colectivoanimalistadelmaipo/?hl=es">Instagram</a>
+                                                    </li>
+                                                    <li><img class="icono me-2 ms-3 breadcrumb-item"
+                                                            src="{% static 'img/img rrss/gorjeo.png' %}" alt=""><a
+                                                            class="animate-charcterFooter" href="">Twitter</a></li>
+                                                    <li><img class="icono me-2 ms-3 breadcrumb-item"
+                                                            src="{% static 'img/img rrss/facebook.png' %}" alt=""><a
+                                                            class="animate-charcterFooter" href="https://www.facebook.com/people/Colectivo-Animalista-Del-Maipo/100064562207119/">Facebook</a></li>
+                                                    <li><img class="icono me-2 ms-3 breadcrumb-item"
+                                                            src="{% static 'img/img rrss/google.png' %}" alt=""><a
+                                                            class="animate-charcterFooter" href="https://docs.google.com/forms/d/e/1FAIpQLSeaxKZlvxSzsZqiijLmi9z1esQHSMGkYX1pkQkDLbcdJR4BOw/viewform">Google</a></li>
+                                                    <li><img class="icono me-2 ms-3 breadcrumb-item"
+                                                            src="{% static 'img/img rrss/whatsapp.png' %}" alt=""><a
+                                                            class="animate-charcterFooter" href="">whatsapp</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--Fin contactos-->
+
+                                    <!--Imagen y CopyRight-->
+                                    <div class="container">
+                                        <div class="row justify-content-center float-center">
+                                            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                <div class="container">
+                                                    <div class="row justify-content-center">
+                                                        <div class="col-sm-1 col-md-1 col-lg-1 col-xl-1"
+                                                            style="width: 100px;height: 60px;">
+                                                            <div class="container">
+                                                                <div class="row justify-content-center">
+                                                                    <img class="img-fluid" src="{% static 'img/bobtail-japones.png' %}"
+                                                                        alt="">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <br>
+
+                                                <div class="container">
+                                                    <div class="row justify-content-center float-center ">
+                                                        <div class="col-sm-5 col-md-6 col-lg-6 col-xl-6">
+                                                            <h6 class="animate-charcterFooter text-center"
+                                                                style="font-size: 10px;">&copy;Copyright Derechos
+                                                                reservados</h6>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--Fin imagen y copyright-->
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!--Fin pie de pagina-->
+
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+                integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+                crossorigin="anonymous"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+                integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+                crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+                crossorigin="anonymous"></script>
+            <script src="{% static 'misJS/script.js'%}"></script>
+            <script src="{% static 'misJS/dom.js' %}"></script>
+            <script src="{% static 'misJS/formulario.js' %}"></script>                
+        </div>
+    </div>
+</body>
+
+</html>

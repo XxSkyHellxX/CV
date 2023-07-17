@@ -1,0 +1,46 @@
+--CASO 1
+SELECT TO_CHAR(ID_CLIENTE,'0999') AS "NUM_INTERNO",
+INITCAP(NOMBRE) AS "Nombre Cliente",
+LOWER(MAIL) AS "CORREO PERSONAL",
+CREDITO AS "CREDITO ACTUAL",
+LPAD(TO_CHAR(CREDITO*1.35,'$0g999g999'),18) "CREDITO AUMENTADO",
+CASE
+    WHEN CODCOMUNA=4 THEN 'Santiago'
+    WHEN CODCOMUNA=8 THEN 'Providencia'
+    WHEN CODCOMUNA IS NULL THEN 'NO INFORMADA'
+END AS "Comuna Residencia"
+FROM CLIENTE
+WHERE (CODCOMUNA IN (4,8) OR CODCOMUNA IS NULL) AND CREDITO>100000
+ORDER BY 4 DESC;
+
+/*
+.-Respuesta Pregunta 1 Caso 1: Es el credito actual, ya que sin este no se podria realizar el calculo necesario que solicita el problema.
+
+.-Respuesta Pregunta 2 Caso 1: Vizualisar a los clientes que entran en la politica de aumentos de credito dada su residencia y su credito actual.
+
+.-Respuesta Pregunta 3 Caso 1: Bind, ya que el porcentaje de incremento podria ser actualizado durante el tiempo,
+y de este forma se puede realizar de una forma mas automatica.
+*/
+
+--CASO 2
+SELECT 
+REPLACE(LTRIM(DESCRIPCION),'  ',' ') AS PRODUCTO,
+LPAD(TO_CHAR(NVL(VALORCOMPRADOLAR*800,0),'$99G999'),15) AS "VALOR_EN_PESOS",
+STKSEGURIDAD,
+TOTALSTOCK,
+STKSEGURIDAD*2.50 AS "SIMULACION SEGURIDAD",
+(TOTALSTOCK-(STKSEGURIDAD*2.50)) AS HOLGURA
+FROM PRODUCTO
+WHERE CODCATEGORIA='P' AND REPLACE(SUBSTR(LTRIM(DESCRIPCION),1,2),' ','  ') IN ('AR','AC')
+ORDER BY 2 ;
+
+--CASO 3
+SELECT 
+'El Vendedor '||UPPER(REPLACE(REPLACE(REPLACE(NOMBRE,'  ',' '),'  ',' '),'  ',' '))||' Tiene: '||
+TRUNC(MONTHS_BETWEEN(SYSDATE, fecha_nac)/12) ||' años cumplidos y trabaja:   '||
+trunc(to_number(to_number(substr(hora_termino,1,2)||substr(hora_termino,4,5))/100-to_number(substr(hora_inicio,1,2)||substr(hora_inicio,4,5))/100),1) ||' hrs. diarias'
+AS "TURNOS DE VENDEDORES NACIDOS ANTERIOR AL AÑO 1997"
+FROM VENDEDOR
+WHERE EXTRACT(YEAR FROM FECHA_NAC)<1996
+ORDER BY TRUNC(MONTHS_BETWEEN(SYSDATE, fecha_nac)/12) DESC;
+

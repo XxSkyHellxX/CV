@@ -1,0 +1,6 @@
+SELECT auto.patente,auto.anio as año,auto.precio,marc.nombreMarca,pa.nombrePais as procedencia,tipo.nombreTipo,com.nombreCombustible
+from automovil auto JOIN autocamioneta autoCam on(auto.patente=autoCam.patente)
+join marca marc on(marc.idMarca=auto.marca)
+join pais pa on(marc.paisMarca=pa.idPais)
+JOIN combustible com on(auto.combustible=Com.idCombustible)
+JOIN tipoautomovil tipo on(auto.tipoautomovil=tipo.idTipoAutomovil) ;
